@@ -93,9 +93,9 @@ function WaveDivider() {
 function SkillsList() {
   const { ref, isInView } = useInView();
   return (
-    <ul ref={ref} className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
+    <div ref={ref} className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
       {AUDIO_SKILLS.map((skill, i) => (
-        <li
+        <div
           key={skill}
           className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
           style={{
@@ -109,9 +109,9 @@ function SkillsList() {
             style={{ boxShadow: isInView ? "0 0 4px hsl(182 100% 50% / 0.4)" : "none" }}
           />
           {skill}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 
