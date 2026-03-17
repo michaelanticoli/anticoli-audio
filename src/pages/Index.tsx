@@ -1,10 +1,8 @@
 import React from "react";
 import { Mail, Phone, Linkedin, Globe, MapPin } from "lucide-react";
 import WaveformVisualizer from "@/components/WaveformVisualizer";
-import EQSkillBar from "@/components/EQSkillBar";
 import SectionReveal from "@/components/SectionReveal";
 import { useInView } from "@/hooks/useInView";
-import { Badge } from "@/components/ui/badge";
 
 const CONTACT_LINKS = [
   { icon: MapPin, label: "Los Angeles, CA", href: null },
@@ -15,14 +13,14 @@ const CONTACT_LINKS = [
 ];
 
 const AUDIO_SKILLS = [
-  { label: "Music Production & Sound Design", level: 95 },
-  { label: "DAW Workflow Optimization", level: 90 },
-  { label: "Audio Plugin Testing", level: 88 },
-  { label: "Signal Processing Concepts", level: 82 },
-  { label: "Creative Audio Experimentation", level: 92 },
-  { label: "Plugin Documentation & Tutorials", level: 87 },
-  { label: "Technical Writing for Musicians", level: 85 },
-  { label: "Sound Design & Synthesis", level: 93 },
+  "Music Production & Sound Design",
+  "DAW Workflow Optimization",
+  "Audio Plugin Testing",
+  "Signal Processing Concepts",
+  "Creative Audio Experimentation",
+  "Plugin Documentation & Tutorials",
+  "Technical Writing for Musicians",
+  "Sound Design & Synthesis",
 ];
 
 const TOOLS = [
@@ -72,59 +70,46 @@ const EXPERIENCE = [
   },
 ];
 
-/* ─── Section divider — animated horizontal waveform line ─── */
+/* ─── Section divider ─── */
 function WaveDivider() {
   return (
-    <div className="relative w-full h-8 my-12 flex items-center justify-center overflow-hidden">
-      <svg
-        className="w-full h-6"
-        viewBox="0 0 1200 24"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <path
-          d={generateWavePath(1200, 24, 5)}
-          stroke="hsl(182 100% 50% / 0.25)"
-          strokeWidth="1"
-          fill="none"
-        />
-        <path
-          d={generateWavePath(1200, 24, 3)}
-          stroke="hsl(182 100% 50% / 0.12)"
-          strokeWidth="0.5"
-          fill="none"
-        />
-      </svg>
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary glow-cyan-sm" />
+    <div className="relative w-full h-6 my-14 flex items-center">
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <div className="mx-4 flex items-center gap-1">
+        {[3, 6, 4, 8, 5, 7, 3].map((h, i) => (
+          <div
+            key={i}
+            className="w-px rounded-full bg-primary"
+            style={{ height: `${h * 2}px`, opacity: 0.35 + (i === 3 ? 0.45 : 0) }}
+          />
+        ))}
+      </div>
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     </div>
   );
 }
 
-function generateWavePath(width: number, height: number, waves: number): string {
-  const mid = height / 2;
-  const amp = height / 3;
-  let d = `M 0 ${mid}`;
-  for (let i = 0; i <= 100; i++) {
-    const x = (i / 100) * width;
-    const y = mid + Math.sin((i / 100) * Math.PI * 2 * waves) * amp;
-    d += ` L ${x.toFixed(1)} ${y.toFixed(1)}`;
-  }
-  return d;
-}
-
-/* ─── Skills section with EQ bars ─── */
-function SkillsSection() {
+/* ─── Skills list — clean, minimal ─── */
+function SkillsList() {
   const { ref, isInView } = useInView();
   return (
-    <div ref={ref} className="space-y-4">
+    <div ref={ref} className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
       {AUDIO_SKILLS.map((skill, i) => (
-        <EQSkillBar
-          key={skill.label}
-          label={skill.label}
-          level={skill.level}
-          delay={i * 80}
-          isVisible={isInView}
-        />
+        <div
+          key={skill}
+          className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+          style={{
+            opacity: isInView ? 1 : 0,
+            transform: isInView ? "translateX(0)" : "translateX(-12px)",
+            transition: `opacity 0.4s ease ${i * 60}ms, transform 0.4s ease ${i * 60}ms`,
+          }}
+        >
+          <span
+            className="w-1 h-1 rounded-full bg-primary shrink-0 group-hover:shadow-[0_0_6px_hsl(182_100%_50%/0.8)] transition-all duration-300"
+            style={{ boxShadow: isInView ? "0 0 4px hsl(182 100% 50% / 0.4)" : "none" }}
+          />
+          {skill}
+        </div>
       ))}
     </div>
   );
@@ -134,15 +119,13 @@ function SkillsSection() {
 export default function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      {/* Scanline overlay */}
-      <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.03]">
-        <div
-          className="w-full h-px bg-primary"
-          style={{ animation: "scanline 6s linear infinite" }}
-        />
+      {/* Ambient background glows */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-primary/[0.03] blur-3xl" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-primary/[0.04] blur-3xl" />
       </div>
 
-      <div className="relative max-w-3xl mx-auto px-6 py-16 space-y-0">
+      <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 space-y-0">
         {/* ═══ HERO ═══ */}
         <header className="text-center space-y-6 pb-6">
           <SectionReveal delay={0} direction="fade">
@@ -166,16 +149,16 @@ export default function Index() {
             </p>
           </SectionReveal>
 
-          <SectionReveal delay={400} direction="fade">
+          <SectionReveal delay={350} direction="fade">
             <WaveformVisualizer />
           </SectionReveal>
 
           {/* Contact links */}
-          <SectionReveal delay={550} direction="fade">
+          <SectionReveal delay={500} direction="fade">
             <div className="flex flex-wrap justify-center gap-3 pt-2">
               {CONTACT_LINKS.map((c) => {
                 const inner = (
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border bg-secondary/50 text-xs text-muted-foreground hover:text-primary hover:border-primary/40 hover:glow-border transition-all duration-300 cursor-pointer">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border bg-secondary/50 text-xs text-muted-foreground hover:text-primary hover:border-primary/40 hover:shadow-[0_0_12px_hsl(182_100%_50%/0.18)] transition-all duration-300 cursor-pointer">
                     <c.icon className="w-3.5 h-3.5" />
                     {c.label}
                   </span>
@@ -211,19 +194,19 @@ export default function Index() {
 
         <WaveDivider />
 
-        {/* ═══ AUDIO SKILLS — EQ bars ═══ */}
+        {/* ═══ AUDIO SKILLS ═══ */}
         <SectionReveal>
           <section className="space-y-6">
             <h2 className="font-mono text-xs tracking-[0.25em] uppercase text-primary">
               // Audio & Music Technology Skills
             </h2>
-            <SkillsSection />
+            <SkillsList />
           </section>
         </SectionReveal>
 
         <WaveDivider />
 
-        {/* ═══ TOOLS — glowing chips ═══ */}
+        {/* ═══ TOOLS ═══ */}
         <SectionReveal>
           <section className="space-y-6">
             <h2 className="font-mono text-xs tracking-[0.25em] uppercase text-primary">
@@ -232,12 +215,9 @@ export default function Index() {
             <div className="flex flex-wrap gap-2">
               {TOOLS.map((tool, i) => (
                 <SectionReveal key={tool} delay={i * 60} direction="fade">
-                  <Badge
-                    variant="outline"
-                    className="px-4 py-1.5 text-xs font-mono border-border bg-secondary/30 text-muted-foreground hover:text-primary hover:border-primary/50 hover:shadow-[0_0_10px_hsl(182_100%_50%/0.2)] transition-all duration-300 cursor-default"
-                  >
+                  <span className="px-4 py-1.5 text-xs font-mono rounded-md border border-border bg-secondary/30 text-muted-foreground hover:text-primary hover:border-primary/40 hover:shadow-[0_0_10px_hsl(182_100%_50%/0.18)] transition-all duration-300 cursor-default">
                     {tool}
-                  </Badge>
+                  </span>
                 </SectionReveal>
               ))}
             </div>
@@ -254,33 +234,31 @@ export default function Index() {
             </h2>
 
             <div className="relative space-y-10 pl-8">
-              {/* Vertical line */}
-              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent" />
+              {/* Vertical timeline line */}
+              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
 
               {EXPERIENCE.map((exp, idx) => (
                 <SectionReveal key={idx} delay={idx * 120}>
-                  <div className="relative">
-                    {/* Timeline dot */}
+                  <div className="relative group">
+                    {/* Timeline dot — glowing */}
                     <div className="absolute -left-8 top-1 flex items-center justify-center">
-                      <div className="w-3.5 h-3.5 rounded-full bg-background border-2 border-primary glow-cyan-sm" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-background border-2 border-primary shadow-[0_0_8px_hsl(182_100%_50%/0.5)] group-hover:shadow-[0_0_16px_hsl(182_100%_50%/0.8)] transition-shadow duration-500" />
                       <div className="absolute w-3.5 h-3.5 rounded-full border border-primary/50 animate-dot-ping" />
                     </div>
 
-                    <h3 className="text-base font-semibold text-primary">
+                    <h3 className="text-base font-semibold text-primary group-hover:shadow-none transition-all duration-300">
                       {exp.title}
                     </h3>
                     {(exp.company || exp.period) && (
                       <p className="font-mono text-xs text-muted-foreground mt-0.5">
-                        {[exp.company, exp.location, exp.period]
-                          .filter(Boolean)
-                          .join(" · ")}
+                        {[exp.company, exp.location, exp.period].filter(Boolean).join(" · ")}
                       </p>
                     )}
                     <ul className="mt-3 space-y-2">
                       {exp.bullets.map((b, bi) => (
                         <SectionReveal key={bi} delay={idx * 120 + bi * 80} direction="right">
-                          <li className="text-sm text-muted-foreground leading-relaxed flex gap-2">
-                            <span className="text-primary mt-1.5 shrink-0">▸</span>
+                          <li className="text-sm text-muted-foreground leading-relaxed flex gap-2 hover:text-foreground transition-colors duration-300">
+                            <span className="text-primary mt-1.5 shrink-0 opacity-60">▸</span>
                             {b}
                           </li>
                         </SectionReveal>
@@ -311,18 +289,13 @@ export default function Index() {
                   <h3 className="text-sm font-semibold text-foreground">
                     Accelerated B.S. + M.S. Information Technology
                   </h3>
-                  <p className="text-xs text-muted-foreground">
-                    Western Governors University
-                  </p>
-                  <p className="font-mono text-xs text-muted-foreground">
-                    Expected 2028
-                  </p>
+                  <p className="text-xs text-muted-foreground">Western Governors University</p>
+                  <p className="font-mono text-xs text-muted-foreground">Expected 2028</p>
                 </div>
               </SectionReveal>
 
               <SectionReveal delay={120}>
                 <div className="rounded-lg border border-border bg-card p-5 space-y-2 relative overflow-hidden hover:border-primary/30 hover:shadow-[0_0_20px_hsl(182_100%_50%/0.08)] transition-all duration-500 group">
-                  {/* Pulsing glow badge */}
                   <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-primary animate-glow-pulse" />
                   <p className="font-mono text-[10px] uppercase tracking-widest text-primary opacity-70">
                     Certification
@@ -330,9 +303,7 @@ export default function Index() {
                   <h3 className="text-sm font-semibold text-foreground">
                     Music Technology & Composition
                   </h3>
-                  <p className="text-xs text-muted-foreground">
-                    Los Angeles City College
-                  </p>
+                  <p className="text-xs text-muted-foreground">Los Angeles City College</p>
                 </div>
               </SectionReveal>
             </div>
