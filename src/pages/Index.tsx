@@ -2,6 +2,10 @@ import React from "react";
 import { Mail, Phone, Linkedin, Globe, MapPin } from "lucide-react";
 import WaveformVisualizer from "@/components/WaveformVisualizer";
 import SectionReveal from "@/components/SectionReveal";
+import ProjectsSection from "@/components/ProjectsSection";
+import AudioPlayerSection from "@/components/AudioPlayerSection";
+import WritingSamplesSection from "@/components/WritingSamplesSection";
+import VideoSection from "@/components/VideoSection";
 import { useInView } from "@/hooks/useInView";
 
 const CONTACT_LINKS = [
