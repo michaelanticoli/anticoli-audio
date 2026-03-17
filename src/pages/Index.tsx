@@ -277,6 +277,34 @@ export default function Index() {
 
         <WaveDivider />
 
+        {/* ═══ PROJECTS ═══ */}
+        <SectionReveal>
+          <ProjectsSection />
+        </SectionReveal>
+
+        <WaveDivider />
+
+        {/* ═══ AUDIO PLAYER ═══ */}
+        <SectionReveal>
+          <AudioPlayerSection />
+        </SectionReveal>
+
+        <WaveDivider />
+
+        {/* ═══ WRITING SAMPLES ═══ */}
+        <SectionReveal>
+          <WritingSamplesSection />
+        </SectionReveal>
+
+        <WaveDivider />
+
+        {/* ═══ VIDEO ═══ */}
+        <SectionReveal>
+          <VideoSection />
+        </SectionReveal>
+
+        <WaveDivider />
+
         {/* ═══ EDUCATION ═══ */}
         <SectionReveal>
           <section className="space-y-6">
