@@ -9,6 +9,13 @@ import WritingSamplesSection from "@/components/WritingSamplesSection";
 import VideoSection from "@/components/VideoSection";
 import { useInView } from "@/hooks/useInView";
 
+const SITE_NAV = [
+  { label: "Home", href: "https://michaelanticoli.com" },
+  { label: "Marketing & Strategy", href: "https://marketing.michaelanticoli.com" },
+  { label: "Audio Lab", href: "/audio-lab" },
+  { label: "Contact", href: "mailto:michaelanticoli@gmail.com" },
+];
+
 const CONTACT_LINKS = [
   { icon: MapPin, label: "Los Angeles, CA", href: null },
   { icon: Phone, label: "973-349-8750", href: "tel:9733498750" },
@@ -130,6 +137,18 @@ export default function Index() {
         <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-primary/[0.04] blur-3xl" />
       </div>
 
+<nav className="w-full max-w-6xl mx-auto px-6 pt-6 flex flex-wrap gap-4 text-xs uppercase tracking-[0.25em]">
+  {SITE_NAV.map((item) => (
+    <a
+      key={item.label}
+      href={item.href}
+      className="text-muted-foreground hover:text-foreground transition-colors"
+    >
+      {item.label}
+    </a>
+  ))}
+</nav>
+      
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 space-y-0">
         {/* ═══ HERO ═══ */}
         <header className="text-center space-y-6 pb-6">
