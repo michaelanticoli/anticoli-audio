@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
-import { Link } from "react-router";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowLeft, AudioLines } from "lucide-react";
 
 const framework = [
