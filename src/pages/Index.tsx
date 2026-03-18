@@ -1,5 +1,6 @@
 import React from "react";
-import { Mail, Phone, Linkedin, Globe, MapPin } from "lucide-react";
+import { Mail, Phone, Linkedin, Globe, MapPin, AudioLines } from "lucide-react";
+import { Link } from "react-router-dom";
 import WaveformVisualizer from "@/components/WaveformVisualizer";
 import SectionReveal from "@/components/SectionReveal";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -175,6 +176,12 @@ export default function Index() {
                   <span key={c.label}>{inner}</span>
                 );
               })}
+              <Link to="/audio-lab">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/40 bg-primary/10 text-xs text-primary hover:bg-primary/20 hover:shadow-[0_0_12px_hsl(182_100%_50%/0.25)] transition-all duration-300 cursor-pointer">
+                  <AudioLines className="w-3.5 h-3.5" />
+                  Audio Lab
+                </span>
+              </Link>
             </div>
           </SectionReveal>
         </header>
