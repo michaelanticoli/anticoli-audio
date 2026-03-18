@@ -1,5 +1,6 @@
 import React from "react";
-import { Mail, Phone, Linkedin, Globe, MapPin } from "lucide-react";
+import { Mail, Phone, Linkedin, Globe, MapPin, AudioLines } from "lucide-react";
+import { Link } from "react-router-dom";
 import WaveformVisualizer from "@/components/WaveformVisualizer";
 import SectionReveal from "@/components/SectionReveal";
 import ProjectsSection from "@/components/ProjectsSection";
