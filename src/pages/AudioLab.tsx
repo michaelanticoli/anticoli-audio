@@ -59,24 +59,27 @@ const artifactRows = [
 
 export default function AudioLab() {
   return (
-    <nav className="w-full max-w-6xl mx-auto px-6 pt-6 flex flex-wrap gap-4 text-xs uppercase tracking-[0.25em]">
-  <a href="https://michaelanticoli.com" className="hover:opacity-70 transition-opacity">
-    Home
-  </a>
-  <a href="https://marketing.michaelanticoli.com" className="hover:opacity-70 transition-opacity">
-    Marketing & Strategy
-  </a>
-  <a href="https://audio.michaelanticoli.com" className="hover:opacity-70 transition-opacity">
-    Audio
-  </a>
-  <a href="mailto:michaelanticoli@gmail.com" className="hover:opacity-70 transition-opacity">
-    Contact
-  </a>
-</nav>
-    <Link to="/" className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity">
-  <ArrowLeft className="h-4 w-4" />
-  Back to Audio Home
-</Link>
+    <div className="min-h-screen bg-black text-white">
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="sticky top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-xl"
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+          <div className="flex flex-col">
+            <span className="tracking-[0.2em] uppercase text-sm">Michael Anticoli</span>
+            <span className="text-xs uppercase tracking-[0.18em] text-white/40">Sound, Story, Strategy</span>
+          </div>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Resume</span>
+          </Link>
+        </div>
+      </motion.header>
 
       <main className="px-6 lg:px-12 py-16">
         <div className="max-w-7xl mx-auto space-y-6">
