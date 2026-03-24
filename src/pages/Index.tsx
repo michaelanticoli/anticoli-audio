@@ -12,7 +12,7 @@ import { useInView } from "@/hooks/useInView";
 const SITE_NAV = [
   { label: "Home", href: "https://michaelanticoli.com" },
   { label: "Marketing & Strategy", href: "https://marketing.michaelanticoli.com" },
-  { label: "Audio Lab", href: "/audio-lab" },
+  { label: "Audio Lab", href: "https://michaelanticoli.com/audio-lab" },
   { label: "Contact", href: "mailto:michaelanticoli@gmail.com" },
 ];
 
